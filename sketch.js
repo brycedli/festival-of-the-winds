@@ -47,6 +47,7 @@ function preload() {
   glShader = loadShader('https://cstudiocoral.s3.amazonaws.com/basic.vert', 'https://cstudiocoral.s3.amazonaws.com/basic.frag');;
 }
 function setup() {
+  document.querySelector('canvas').style.pointerEvents = 'auto';
   print("hello");
   canvas = createCanvas(windowWidth, windowHeight);
 
@@ -123,7 +124,7 @@ function draw() {
   for (let kite of kites){
     kite.show();
   }
-  
+  print(document.querySelector('canvas').style.pointerEvents);
   
   // windDirection = Matter.Vector.create(((width-mouseX)/width)*1.2, ((height-mouseY)/height-1)*1.2);
 
@@ -138,6 +139,10 @@ function keyPressed(){
   }
 }
 
+function mousePressed () {
+  document.querySelector('canvas').style.pointerEvents = 'auto';
+}
+
 function windowResized(){
   // for (let boundary of boundaries){
   //   World.remove(boundary.body);
@@ -149,7 +154,7 @@ function windowResized(){
 var timer = null;
 
 window.addEventListener('scroll', function() {
-  if(timer !== null) {
+  if(timer) {
       clearTimeout(timer);        
   }
   timer = setTimeout(function() {
@@ -159,9 +164,9 @@ window.addEventListener('scroll', function() {
   }, 150);
 }, false);
 
+
 function handleScroll(event) {
-  if (window.pageYOffset >= 0) {
-    
+  if (window.pageYOffset > 0 || document.querySelector('canvas').style.pointerEvents == 'auto') {
     document.querySelector('canvas').style.pointerEvents = 'none';
   }
 
@@ -200,5 +205,3 @@ function changeImage(){
   document.getElementById("changeKite").src = kiteIcon[kiteIndex];
   print(document.getElementById("changeKite").src);
 }
-
-$( "button.continue" ).html( "Next Step..." )
