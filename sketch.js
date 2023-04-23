@@ -143,6 +143,10 @@ function mousePressed () {
   document.querySelector('canvas').style.pointerEvents = 'auto';
 }
 
+function mouseMoved() {
+  document.querySelector('canvas').style.pointerEvents = 'auto';
+}
+
 function windowResized(){
   // for (let boundary of boundaries){
   //   World.remove(boundary.body);
