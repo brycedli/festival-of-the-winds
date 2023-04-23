@@ -124,7 +124,6 @@ function draw() {
   for (let kite of kites){
     kite.show();
   }
-  print(document.querySelector('canvas').style.pointerEvents);
   
   // windDirection = Matter.Vector.create(((width-mouseX)/width)*1.2, ((height-mouseY)/height-1)*1.2);
 
@@ -207,5 +206,25 @@ let kiteIcon = ["/assets/kites/diamondBW.svg", "/assets/kites/boxBW.svg","/asset
 function changeImage(){
   kiteIndex = (kiteIndex + 1) % 3;
   document.getElementById("changeKite").src = kiteIcon[kiteIndex];
-  print(document.getElementById("changeKite").src);
+  // print(document.getElementById("changeKite").src);
 }
+
+// Targeting video element 
+// let clip = document.querySelector("logoVideo");
+  
+// /* Applying mouseover event on video clip 
+// and then we call play() function to play 
+// the video when the mouse is over the video */
+// clip.addEventListener("mouseover", function (e) {
+//   print("mouseover");
+//     clip.play();
+// })
+
+// /* Applying mouseout event on video clip 
+// and then we call pause() function to stop 
+// the video when the mouse is out the video */
+// clip.addEventListener("mouseout", function (e) {
+//   print("mouseover");
+
+//     clip.pause();
+// })
