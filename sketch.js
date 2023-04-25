@@ -50,7 +50,7 @@ function setup() {
   document.querySelector('canvas').style.pointerEvents = 'auto';
   print("hello");
   canvas = createCanvas(windowWidth, windowHeight);
-
+  canvas.parent('sketch-holder');
   glCanvas = createGraphics(canvas.width, canvas.height, WEBGL);
   glCanvas.pixelDensity(1/glDensity);
 

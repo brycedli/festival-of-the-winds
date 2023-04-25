@@ -16,28 +16,29 @@
   <script language="javascript" type="text/javascript" src="kite.js"></script>
 
   <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
 
 <body>
-  <main>
-  </main>
+  <div id="sketch-holder"></div>
   <button class="down" onclick="document.getElementById('scrollToContent').scrollIntoView()">
     <h2 class="whiteText">SEE MORE</h2>
     <img src="assets/icons/keyboard_arrow_down.svg" />
   </button>
   <div class="content" id="scrollToContent">
-    
+
     <div class="icongrouphorizontal">
       <div class="icon">
-        <img src="assets/icons/access_timewhite.svg" style="width:32px"/>
+        <img src="assets/icons/access_timewhite.svg" style="width:32px" />
         <h2 class="whiteText">September 11th, 2023, 11 am to 3 pm</h2>
       </div>
       <div class="icon">
-        <img src="assets/icons/location_onwhite.svg" style="width:32px"/>
+        <img src="assets/icons/location_onwhite.svg" style="width:32px" />
         <h2 class="whiteText"> Bondi Beach, Sydney, New South Wales, Australia</h2>
       </div>
     </div>
-    <h1 style="width: 60%;">For one day only, the sky above Bondi Beach will come alive with colours and wind-powered <img onclick="changeImage()" id="changeKite"
-        src="assets/icons/kiteInline.svg" />’s in one massive celebration of ‘sky-high’ activity at this year's Festival of the Winds.</h1>
+    <h1 style="width: 60%;">For one day only, the sky above Bondi Beach will come alive with colours and wind-powered
+      <img onclick="changeImage()" id="changeKite" src="assets/icons/kiteInline.svg" />’s in one massive celebration of
+      ‘sky-high’ activity at this year's Festival of the Winds.</h1>
     <hr>
     <div class="icongroup">
       <div class="icon">
@@ -49,9 +50,11 @@
         <h2>Bondi Beach, Sydney, New South Wales, Australia</h2>
       </div>
     </div>
-    
+
   </div>
-  <img class="banner" src="assets/banner/woaaahhh.svg" />
+  <img class="banner" src="assets/banner/woaaahhh_repeat.svg" />
+  <!-- <img class="banner" src="assets/banner/woaaahhh.svg" /> -->
+
   <!-- <img class="banner" src="assets/banner/patternBanner.svg" /> -->
 
   <div class="schedulewoah">
@@ -59,68 +62,100 @@
       <!-- <img src="assets/icons/blob.png" class="blob" />  -->
       <div class="timeContainer">
         <h1>11 am</h1>
-        <hr></hr>
-        <div class="horizontalTimeContainer" >
-          <h2>Kids & family<p> <br />
-              Roaming entertainment <br />
-              Puppet shows<br />
-              Face painting</p>
-          </h2>
-        
-          <h2>Food stalls<p> <br />
-              Burger Buggy <br />
-              Taco Truckin' <br />
-              Waffle Wheels <br />
-              Grilled Cheese on the Go <br />
-              Fry Fry Again</p>
-          </h2>
-        
-          <h2 style="width:400px">Live music  
-            <p> <br /> 
-              Suwitra Jaya - UNSW Gamelon Ensemble <br/>
-              Castlereagh Connection <br/>
-              Sirens Dance – Bollywood Fusion <br/>
-              Victor Valdes and his Big Mexican Mariachi Band <br/>
-              KEYIM BA <br/>
-              Black Joak Morris <br/>
-              Beeswax and Bottlecaps <br/>
-              Paper Plane Pilot – Dylan Parker <br/>
+        <hr>
+        <div class="horizontalTimeContainer">
+          <div class="listSection">
+            <h2>Kids & family</h2>
+            <p>
+              Roaming entertainment <br/>
+              Puppet shows<br/>
+              Face painting
             </p>
-          </h2>
+          </div>
+          <div class="listSection">
+            <h2>Food stalls</h2>
+            <p>
+              Burger Buggy <br/>
+              Taco Truckin' <br/>
+              Waffle Wheels <br/>
+              Grilled Cheese on the Go <br/>
+              Fry Fry Again</p>
+          </div>
+          <div class="listSection">
+            <h2>Live music</h2>
+            <p>
+              Suwitra Jaya - UNSW Gamelon Ensemble <br />
+              Castlereagh Connection <br />
+              Sirens Dance – Bollywood Fusion <br />
+              Victor Valdes and his Big Mexican Mariachi Band <br />
+              KEYIM BA <br />
+              Black Joak Morris <br />
+              Beeswax and Bottlecaps <br />
+              Paper Plane Pilot – Dylan Parker <br />
+            </p>
+          </div>
+          
         </div>
       </div>
-      <div class="timeContainer" >
+      <div class="timeContainer">
         <h1>3 pm</h1>
-        <hr></hr>
+        <hr>
         <div class="horizontalTimeContainer">
-          
-          <h2>Judging<p> <br />
+          <div class="listSection">
+            <h2>Judging</h2>
+            <p>
               Kite flier introduction <br/>
-              Presentations <br/>
-              Award ceremony <br/>
-          </h2>
-        
-          <h2>Sponsor meetup<p> <br />
-              Bendigo Bank <br/>
-              Clarke Creek Wind Farm <br/>
-              Fun Time Amusements <br/>
-          </h2>
+              Presentations<br/>
+              Award ceremony
+            </p>
+          </div>
+          <div class="listSection">
+            <h2>Sponsor meetup</h2>
+            <p>
+              Bendigo Bank<br/>
+              Clarke Creek Wind Farm<br/>
+              Fun Time Amusements
+            </p>
+          </div>
         </div>
       </div>
       <!-- <div style="max-width:100%;list-style:none; transition: none;overflow:hidden;width:500px;height:500px;"><div id="canvas-for-googlemap" style="height:100%; width:100%;max-width:100%;"><iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=bondi+beach&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe></div><a class="googlecoder" href="https://kbj9qpmy.com/hrn" id="enable-map-data">Hosting Right Now</a><style>#canvas-for-googlemap img{max-width:none!important;background:none!important;font-size: inherit;font-weight:inherit;}</style></div> -->
 
     </div>
-    
-    <!-- <div class="bannerFill">
-      <img src="/assets/banner/woaaahhhSquare.svg" />
-    </div> -->
-    
+    <div class="FAQ">
+      <h1>FAQ</h1>
+      <hr>
+      <div class="FAQlist">
+        <div class="listSection" >
+          <h2>What’s the cost of attendance?</h2>
+          <p>
+            Festival of the Winds is FREE and open to the public. There’s no need to reserve in advance! Just show up at Bondi Beach. 
+          </p>
+        </div>
+        <div class="listSection">
+          <h2>Who’s organizing the festival?</h2>
+          <p>
+            2023’s Festival of The Winds is run by a group of dedicated kite-fliers in conjunction with the Australian Kiteflying Society & the Waverly city council.          </p>
+        </div>
+        <div class="listSection">
+          <h2>When is kite flying allowed on Bondi Beach?</h2>
+          <p>
+            Kite flying is only allowed on Bondi beach for 3 days each year– the Friday, Saturday, and Sunday of the second weekend of September.           </p>
+        </div>
+        
+        
+      </div>
+    </div>
+    <!-- <div class="bannerFill"> -->
+    <!-- </div> -->
+
   </div>
   <footer>
     <!-- <img src="assets/icons/fotw_wordmark_long.svg" /> onmouseout="this.play();this.currentTime=2.1;"-->
-    <video width="470" height="35" onmouseover="if (this.ended||this.currentTime==0){this.currentTime=0.7;this.play();}" >
+    <video width="470" height="35"
+      onmouseover="if (this.ended||this.currentTime==0){this.currentTime=0.7;this.play();}console.log()">
       <source class="logoVideo" src="assets/videos/fotwLongWhite0.mp4" type="video/mp4">
-    Your browser does not support the video tag.
+      Your browser does not support the video tag.
     </video>
     <div class="footerContainer">
       <a href="tel:(02)98038000" target="_blank" class="icon">
@@ -135,10 +170,5 @@
   </footer>
 </body>
 <!-- <style> body {padding: 0; margin: 0;} </style> -->
-
-</head>
-
-<body>
-</body>
 
 </html>
