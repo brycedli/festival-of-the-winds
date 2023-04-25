@@ -151,8 +151,7 @@ div.icongrouphorizontal {
 	top: 40px;
 }
 
-button.down {
-	/* Auto layout */
+/* button.down {
 	background: none;
 	border: none;
 	display: flex;
@@ -163,10 +162,30 @@ button.down {
 
 	position: absolute;
 	width: 120px;
-	/* height: 55px; */
 	left: calc(50% - 120px/2);
 	bottom: calc(0% + 20px);
 
+} */
+
+button.down {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 14px 20px;
+	gap: 10px;
+	
+	position: absolute;
+	left: calc(50% - 187px/2 + 0.5px);
+	bottom: calc(0% + 30px);
+
+	border: none;
+	background-color: #FFFFFF;
+	border-radius: 200px;
+}
+
+button.down:hover {
+	background-color: #E9E9E9;
 }
 
 
