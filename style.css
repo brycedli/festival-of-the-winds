@@ -197,6 +197,40 @@ button.down {
 	background-color: #FFFFFF;
 	border-radius: 200px;
 }
+div.centerUpButton{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 10px 10px 50px;
+	gap: 10px;
+
+}
+
+button {
+	cursor: pointer;
+}
+
+button.up{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 14px 20px;
+	gap: 10px;
+	
+	/* position: absolute; */
+	/* left: calc(50% - 187px/2 + 0.5px);
+	bottom: calc(30px); */
+
+	border: none;
+	background-color: #FFFFFF;
+	border-radius: 200px;
+}
+
+button.up:hover{
+	background-color: #E9E9E9;
+}
 
 button > h2{
 	color: #000000;

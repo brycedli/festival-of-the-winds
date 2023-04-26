@@ -131,8 +131,8 @@ function draw() {
   background("#91A9C2")
   // let brightness = 1-getScrollPercent();
   if (imageChange && frameCount%20==0){
-    kiteIndex = (kiteIndex + 1) % kiteSpritesURL.length;
-    document.getElementById("changeKite").src = kiteSpritesURL[kiteIndex];
+    // kiteIndex = (kiteIndex + 1) % kiteSpritesURL.length;
+    document.getElementById("changeKite").src = random(kiteSpritesURL);
   }
   glShader.setUniform('u_time', millis()/1000);
   glShader.setUniform('u_brightness',1);
@@ -174,6 +174,7 @@ function draw() {
   for (let ligature of ligatures) {
     ligature.show();
   }
+  noStroke();
   fill(0, (getScrollPercent())*255*0.9);
   rect(0, 0, width, height);
 
