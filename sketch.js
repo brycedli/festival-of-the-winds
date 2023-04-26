@@ -67,7 +67,6 @@ function setup() {
   world = engine.world;
   engine.gravity.y = 0;
   // let mouse = Mouse.create(elementTarget);
-  // print(elementTarget);
   let mouse = Mouse.create(canvas.elt.parentElement);
   mouse.element.removeEventListener("mousewheel", mouse.mousewheel);
   mouse.element.removeEventListener("DOMMouseScroll", mouse.mousewheel);
@@ -147,7 +146,6 @@ function draw() {
   glShader.setUniform('u_brightness',1);
   glShader.setUniform('u_resolution', [glCanvas.width/(glDensity*2), glCanvas.height/(glDensity*2)]);
   glShader.setUniform('u_mouse', [mouseX, mouseY]);
-  print(transistionFrom, transistionTo);
   let t = (millis()-transistionTime)/300;
   let finalColor0 = transistionTo[0];
   let finalColor1 = transistionTo[1];
@@ -237,23 +235,3 @@ function startChangeImage(){
 function stopChangeImage(){
   imageChange = false;
 }
-
-// Targeting video element 
-// let clip = document.querySelector("logoVideo");
-  
-// /* Applying mouseover event on video clip 
-// and then we call play() function to play 
-// the video when the mouse is over the video */
-// clip.addEventListener("mouseover", function (e) {
-//   print("mouseover");
-//     clip.play();
-// })
-
-// /* Applying mouseout event on video clip 
-// and then we call pause() function to stop 
-// the video when the mouse is out the video */
-// clip.addEventListener("mouseout", function (e) {
-//   print("mouseover");
-
-//     clip.pause();
-// })
