@@ -37,6 +37,9 @@ let winds = "https://cstudiocoral.s3.amazonaws.com/windswhite.png";
 
 let imageChange = false;
 
+let transistionTo;
+let transistionFrom;
+
 function preload() {
   for (let i = 0; i < kiteSpritesURL.length; i++){
     kiteSprites[i] = loadImage(kiteSpritesURL[i]);
@@ -86,6 +89,9 @@ function setup() {
   boundaries.push(new Boundary(width / 2, height * -0.5 + 100, width*2, 100));
   boundaries.push(new Boundary(width / 2, height * 1.5, width*2, 100));
   windDirection = Matter.Vector.create(1,-0.5);
+
+  transistionTo = [color(34, 82, 131), color(159, 190, 208)];
+  transistionFrom = [color(34, 82, 131), color(159, 190, 208)]
 }
 
 function spawnWordGroup(x, y) {
@@ -115,16 +121,19 @@ function getScrollPercent() {
       sh = 'scrollHeight';
   return (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight);
 }
-let transistionIndex = 0;
+
 
 let count = 0;
+let transistionTime = 0;
 function setTime (target){
+  transistionTime = millis();
   if (target=="11am"){
-    
-    transistionIndex = 0;
+    transistionFrom = transistionTo;
+    transistionTo = [color("#002761"), color("#BA7979")];
   }
   if (target=="3pm"){
-    transistionIndex = 1;
+    transistionFrom = transistionTo;
+    transistionTo = [color(34, 82, 131), color(159, 190, 208)];
   }
 }
 function draw() {
@@ -138,28 +147,18 @@ function draw() {
   glShader.setUniform('u_brightness',1);
   glShader.setUniform('u_resolution', [glCanvas.width/(glDensity*2), glCanvas.height/(glDensity*2)]);
   glShader.setUniform('u_mouse', [mouseX, mouseY]);
-  let mainColor0 = color(34, 82, 131);
-  let mainColor1 = color(159, 190, 208);
-  let weird0 = color("#002761");
-  let weird1 = color("#BA7979");
-  let finalColor0 = lerpColor(mainColor0, weird0, transistionIndex);
-  let finalColor1 = lerpColor(mainColor1, weird1, transistionIndex);
-
-  // finalColor0.setRed(red(finalColor0)*brightness);
-  // finalColor0.setGreen(green(finalColor0)*brightness);
-  // finalColor0.setBlue(blue(finalColor0)*brightness);
-
-  // finalColor1.setRed(red(finalColor1)*brightness);
-  // finalColor1.setGreen(green(finalColor1)*brightness);
-  // finalColor1.setBlue(blue(finalColor1)*brightness);
-
-  // colorMode(HSB);
-  // finalColor0.brightness(255*mouseX/width);
-  // finalColor1.brightness(255*mouseX/width);
+  print(transistionFrom, transistionTo);
+  let t = (millis()-transistionTime)/300;
+  let finalColor0 = transistionTo[0];
+  let finalColor1 = transistionTo[1];
+  if (t < 1){
+    finalColor0 = lerpColor(transistionFrom[0], transistionTo[0], t);
+    finalColor1 = lerpColor(transistionFrom[1], transistionTo[1], t);
+  }
+  
   glShader.setUniform('u_color0', getUniform(finalColor0));
   glShader.setUniform('u_color1', getUniform(finalColor1));
-    //vec3 color0 = vec3(34.0/255.0, 82.0/255.0, 131.0/255.0);
-  //vec3 color1 = vec3(159.0/255.0, 190.0/255.0, 208.0/255.0);
+
   glCanvas.shader(glShader);
   glCanvas.rect(0,0,width, height);
   image(glCanvas, 0, 0, windowWidth, windowHeight);
