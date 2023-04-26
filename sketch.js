@@ -24,10 +24,10 @@ let glCanvas;
 let glShader;
 let windDirection;
 let glDensity = 5;
-let kiteSprites = ["/assets/kites/arrowblue.png", "/assets/kites/arroworange.png","/assets/kites/arrowlime.png",
+let kiteSpritesURL = ["/assets/kites/arrowblue.png", "/assets/kites/arroworange.png","/assets/kites/arrowlime.png",
                   "/assets/kites/boxblue.png", "/assets/kites/boxorange.png","/assets/kites/boxlime.png",
                   "/assets/kites/diamondblue.png", "/assets/kites/diamondorange.png","/assets/kites/diamondlime.png"];
-
+let kiteSprites = [];
 let kiteSpritesWhite = ["/assets/kites/arrowwhite.png", "/assets/kites/boxwhite.png","/assets/kites/diamondwhite.png"];
 
 let festival = "https://cstudiocoral.s3.amazonaws.com/festivalwhite.png";
@@ -35,20 +35,21 @@ let of = "https://cstudiocoral.s3.amazonaws.com/ofwhite.png";
 let the = "https://cstudiocoral.s3.amazonaws.com/thewhite.png";
 let winds = "https://cstudiocoral.s3.amazonaws.com/windswhite.png";
 
+let imageChange = false;
+
 function preload() {
-  for (let i = 0; i < kiteSprites.length; i++){
-    kiteSprites[i] = loadImage(kiteSprites[i]);
+  for (let i = 0; i < kiteSpritesURL.length; i++){
+    kiteSprites[i] = loadImage(kiteSpritesURL[i]);
   }
   
   festival = loadImage(festival);
   of = loadImage(of);
   the = loadImage(the);
   winds = loadImage(winds);
-  glShader = loadShader('https://cstudiocoral.s3.amazonaws.com/basic.vert', 'https://cstudiocoral.s3.amazonaws.com/basic.frag');;
+  glShader = loadShader('/shaders/basic.vert', '/shaders/basic.frag');;
 }
 function setup() {
   document.querySelector('canvas').style.pointerEvents = 'auto';
-  print("hello");
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('sketch-holder');
   glCanvas = createGraphics(canvas.width, canvas.height, WEBGL);
@@ -59,11 +60,15 @@ function setup() {
 
 
   engine = Engine.create();
+  // let elementTarget = document.getElementById("sketch-holder");
   world = engine.world;
   engine.gravity.y = 0;
-  let mouse = Mouse.create(canvas.elt);
-  print(canvas.elt);
-  mouse.pixelRatio = pixelDensity() // for retina displays etc
+  // let mouse = Mouse.create(elementTarget);
+  // print(elementTarget);
+  let mouse = Mouse.create(canvas.elt.parentElement);
+  mouse.element.removeEventListener("mousewheel", mouse.mousewheel);
+  mouse.element.removeEventListener("DOMMouseScroll", mouse.mousewheel);
+  // mouse.pixelRatio = pixelDensity() // for retina displays etc
   let options = {
     mouse: mouse
   }
@@ -81,8 +86,6 @@ function setup() {
   boundaries.push(new Boundary(width / 2, height * -0.5 + 100, width*2, 100));
   boundaries.push(new Boundary(width / 2, height * 1.5, width*2, 100));
   windDirection = Matter.Vector.create(1,-0.5);
-
-  
 }
 
 function spawnWordGroup(x, y) {
@@ -101,12 +104,62 @@ function spawnWordGroup(x, y) {
   ligatures.push(new Ligature(theWord, windsWord));
 }
 
+function getUniform(inputColor){
+  return [red(inputColor)/255, green(inputColor)/255, blue(inputColor)/255];
+}
+
+function getScrollPercent() {
+  var h = document.documentElement, 
+      b = document.body,
+      st = 'scrollTop',
+      sh = 'scrollHeight';
+  return (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight);
+}
+let transistionIndex = 0;
+
 let count = 0;
+function setTime (target){
+  if (target=="11am"){
+    
+    transistionIndex = 0;
+  }
+  if (target=="3pm"){
+    transistionIndex = 1;
+  }
+}
 function draw() {
   background("#91A9C2")
+  // let brightness = 1-getScrollPercent();
+  if (imageChange && frameCount%20==0){
+    kiteIndex = (kiteIndex + 1) % kiteSpritesURL.length;
+    document.getElementById("changeKite").src = kiteSpritesURL[kiteIndex];
+  }
   glShader.setUniform('u_time', millis()/1000);
+  glShader.setUniform('u_brightness',1);
   glShader.setUniform('u_resolution', [glCanvas.width/(glDensity*2), glCanvas.height/(glDensity*2)]);
   glShader.setUniform('u_mouse', [mouseX, mouseY]);
+  let mainColor0 = color(34, 82, 131);
+  let mainColor1 = color(159, 190, 208);
+  let weird0 = color("#002761");
+  let weird1 = color("#BA7979");
+  let finalColor0 = lerpColor(mainColor0, weird0, transistionIndex);
+  let finalColor1 = lerpColor(mainColor1, weird1, transistionIndex);
+
+  // finalColor0.setRed(red(finalColor0)*brightness);
+  // finalColor0.setGreen(green(finalColor0)*brightness);
+  // finalColor0.setBlue(blue(finalColor0)*brightness);
+
+  // finalColor1.setRed(red(finalColor1)*brightness);
+  // finalColor1.setGreen(green(finalColor1)*brightness);
+  // finalColor1.setBlue(blue(finalColor1)*brightness);
+
+  // colorMode(HSB);
+  // finalColor0.brightness(255*mouseX/width);
+  // finalColor1.brightness(255*mouseX/width);
+  glShader.setUniform('u_color0', getUniform(finalColor0));
+  glShader.setUniform('u_color1', getUniform(finalColor1));
+    //vec3 color0 = vec3(34.0/255.0, 82.0/255.0, 131.0/255.0);
+  //vec3 color1 = vec3(159.0/255.0, 190.0/255.0, 208.0/255.0);
   glCanvas.shader(glShader);
   glCanvas.rect(0,0,width, height);
   image(glCanvas, 0, 0, windowWidth, windowHeight);
@@ -121,10 +174,12 @@ function draw() {
   for (let ligature of ligatures) {
     ligature.show();
   }
+  fill(0, (getScrollPercent())*255*0.9);
+  rect(0, 0, width, height);
+
   for (let kite of kites){
     kite.show();
   }
-  
   // windDirection = Matter.Vector.create(((width-mouseX)/width)*1.2, ((height-mouseY)/height-1)*1.2);
 
 }
@@ -138,13 +193,7 @@ function keyPressed(){
   }
 }
 
-function mousePressed () {
-  document.querySelector('canvas').style.pointerEvents = 'auto';
-}
 
-function mouseMoved() {
-  document.querySelector('canvas').style.pointerEvents = 'auto';
-}
 
 function windowResized(){
   // for (let boundary of boundaries){
@@ -154,29 +203,6 @@ function windowResized(){
   glCanvas.resizeCanvas(windowWidth, windowHeight);
 }
 
-var timer = null;
-
-window.addEventListener('scroll', function() {
-  if(timer) {
-      clearTimeout(timer);        
-  }
-  timer = setTimeout(function() {
-    document.querySelector('canvas').style.pointerEvents = 'auto';
-
-        // do something
-  }, 150);
-}, false);
-
-
-function handleScroll(event) {
-  if (window.pageYOffset > 0 || document.querySelector('canvas').style.pointerEvents == 'auto') {
-    document.querySelector('canvas').style.pointerEvents = 'none';
-  }
-
-}
-
-// add event listener for the wheel event on the document or window object
-document.addEventListener('wheel', handleScroll);
 
 window.smoothScroll = function(target) {
   var scrollContainer = target;
@@ -201,12 +227,15 @@ window.smoothScroll = function(target) {
   scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
 }
 let kiteIndex = 0;
+// let kiteIcon = ["/assets/kites/diamondBW.svg", "/assets/kites/boxBW.svg","/assets/kites/arrowBW.svg"];
 let kiteIcon = ["/assets/kites/diamondBW.svg", "/assets/kites/boxBW.svg","/assets/kites/arrowBW.svg"];
 
-function changeImage(){
-  kiteIndex = (kiteIndex + 1) % 3;
-  document.getElementById("changeKite").src = kiteIcon[kiteIndex];
-  // print(document.getElementById("changeKite").src);
+function startChangeImage(){
+  imageChange = true;
+}
+
+function stopChangeImage(){
+  imageChange = false;
 }
 
 // Targeting video element 

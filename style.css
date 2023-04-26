@@ -58,14 +58,24 @@ html {
 
 canvas {
 	display: block;
-	position: relative;
+	position: fixed;
 	left: 0;
 	top: 0;
 	pointer-events: auto;
-
+	z-index: -1;
 }
 a {
 	text-decoration: none;
+}
+
+.icon >* a {
+	text-decoration: underline;
+}
+
+.icon >* a:hover {
+	text-decoration: underline;
+	opacity: 80%;
+	cursor: pointer;
 }
 main {
 	overflow-y: auto;
@@ -76,7 +86,7 @@ main {
 }
 
 hr {
-	border: 0.5px solid rgba(0, 0, 0, 0.5);
+	border: 0.5px solid rgba(255, 255, 255, 0.5);
 	width: 60%;
 	margin-left: 0;
 
@@ -93,14 +103,14 @@ h1 {
 	font-size: 48px;
 	line-height: 62px;
 
-	color: #000000;
+	color: #FFFFFF;
 }
 
 h2 {
 	font-family: 'ABC Social Plus Variable';
 	font-weight: 350;
 	font-size: 24px;
-	color: #000000;
+	color:  #FFFFFF;
 }
 
 p {
@@ -109,7 +119,11 @@ p {
 	font-size: 16px;
 	line-height: 21px;
 
-	color: rgba(0, 0, 0, 0.7);
+	color: rgba(255, 255, 255, 0.7);
+}
+
+footer >* p {
+	color:rgba(0, 0, 0, 0.7);
 }
 div.content {
 	/* Auto layout */
@@ -120,7 +134,7 @@ div.content {
 	padding: 80px 80px;
 	gap: 40px;
 
-	background: #E3FD8C;
+	/* background: #E3FD8C; */
 	padding: 1rem auto;
 	display: flex;
 	flex-wrap: wrap;
@@ -182,6 +196,10 @@ button.down {
 	border: none;
 	background-color: #FFFFFF;
 	border-radius: 200px;
+}
+
+button > h2{
+	color: #000000;
 }
 
 button.down:hover {
@@ -253,12 +271,6 @@ div.footerContainer {
 	gap: 40px;
 }
 
-.whiteText {
-	color: #FFFFFF;
-	 
-
-}
-
 ::selection {
 	background: #FF2F01; /* WebKit/Blink Browsers */
   }
@@ -301,7 +313,7 @@ img.banner{
 }
 
 div.schedulewoah{
-	background: #FF5E54;
+	/* background: #FF5E54; */
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
@@ -335,4 +347,14 @@ div.listSection {
 	align-items: flex-start;
 	padding: 0px;
 	gap: 20px;
+}
+
+/* div.heroSpacer {
+	pointer-events:none;
+	height: 100vh;
+} */
+
+#sketch-holder {
+	pointer-events:auto;
+	height: 100vh;
 }

@@ -24,35 +24,37 @@
     <h2>SEE MORE</h2>
     <img src="assets/icons/keyboard_arrow_downblack.svg" />
   </button>
+  <hr style="width:100%">
   <div class="content" id="scrollToContent">
 
     <div class="icongrouphorizontal">
       <div class="icon">
         <img src="assets/icons/access_timewhite.svg" style="width:32px" />
-        <h2 class="whiteText">September 11th, 2023, 11 am to 3 pm</h2>
+        <h2>September 11th, 2023, <a onClick="setTime('11am');">11 am</a> to <a onClick="setTime('3pm');">3 pm</a></h2>
       </div>
       <div class="icon">
         <img src="assets/icons/location_onwhite.svg" style="width:32px" />
-        <h2 class="whiteText"> Bondi Beach, Sydney, New South Wales, Australia</h2>
+        <h2> Bondi Beach, Sydney, New South Wales, Australia</h2>
       </div>
     </div>
     <h1 style="width: 60%;">For one day only, the sky above Bondi Beach will come alive with colours and wind-powered
-      <img onclick="changeImage()" id="changeKite" src="assets/icons/kiteInline.svg" />’s in one massive celebration of
+      <img onmouseenter="startChangeImage()" onmouseleave="stopChangeImage()" id="changeKite" src="/assets/kites/diamondwhite.png" />’s in one massive celebration of
       ‘sky-high’ activity at this year's Festival of the Winds.</h1>
-    <hr>
+    <!-- <hr> -->
     <div class="icongroup">
       <div class="icon">
-        <img src="assets/icons/access_timeblack.svg" />
+        <img src="assets/icons/access_timewhite.svg" />
         <h2>September 11th, 2023, 11 am to 3 pm</h2>
       </div>
       <div class="icon">
-        <img src="assets/icons/location_onblack.svg" />
+        <img src="assets/icons/location_onwhite.svg" />
         <h2>Bondi Beach, Sydney, New South Wales, Australia</h2>
       </div>
     </div>
 
   </div>
-  <img class="banner" src="assets/banner/woaaahhh_repeat.svg" />
+  
+  <!-- <img class="banner" src="assets/banner/woaaahhh_repeat.svg" /> -->
   <!-- <img class="banner" src="assets/banner/woaaahhh.svg" /> -->
 
   <!-- <img class="banner" src="assets/banner/patternBanner.svg" /> -->
