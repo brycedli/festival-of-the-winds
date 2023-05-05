@@ -393,3 +393,10 @@ div.listSection {
 	pointer-events:auto;
 	height: 100vh;
 }
+
+.tooltip {
+	pointer-events: none;
+	position: absolute;
+	left: calc(50% - 255px/2 + 0.5px);
+	top: calc(50% - 31px/2 + 0.5px);
+}

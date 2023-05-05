@@ -40,6 +40,9 @@ let imageChange = false;
 let transistionTo;
 let transistionFrom;
 
+let tooltipElement;
+let showTooltip = true;
+
 function preload() {
   for (let i = 0; i < kiteSpritesURL.length; i++){
     kiteSprites[i] = loadImage(kiteSpritesURL[i]);
@@ -52,6 +55,7 @@ function preload() {
   glShader = loadShader('/shaders/basic.vert', '/shaders/basic.frag');;
 }
 function setup() {
+  tooltipElement = document.querySelector('.tooltip');
   document.querySelector('canvas').style.pointerEvents = 'auto';
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('sketch-holder');
@@ -191,7 +195,13 @@ function keyPressed(){
   }
 }
 
-
+function mousePressed() {
+  if (showTooltip){
+    showTooltip = false;
+    tooltipElement.style.display = 'none';
+    // print(tooltipElement);
+  }
+}
 
 function windowResized(){
   // for (let boundary of boundaries){
