@@ -43,6 +43,8 @@ let transistionFrom;
 let tooltipElement;
 let showTooltip = true;
 
+let trueWidth;
+let trueHeight;
 function preload() {
   for (let i = 0; i < kiteSpritesURL.length; i++){
     kiteSprites[i] = loadImage(kiteSpritesURL[i]);
@@ -57,13 +59,12 @@ function preload() {
 function setup() {
   tooltipElement = document.querySelector('.tooltip');
   document.querySelector('canvas').style.pointerEvents = 'auto';
-  canvas = createCanvas(windowWidth, windowHeight);
+  trueWidth = document.documentElement.clientWidth
+  trueHeight = document.documentElement.clientHeight
+  canvas = createCanvas(trueWidth, trueHeight);
   canvas.parent('sketch-holder');
-  glCanvas = createGraphics(canvas.width, canvas.height, WEBGL);
+  glCanvas = createGraphics(trueWidth, trueHeight, WEBGL);
   glCanvas.pixelDensity(1/glDensity);
-
-  // an initial color to look for
-  colorToMatch = color(255,150,0);
 
 
   engine = Engine.create();
@@ -96,6 +97,10 @@ function setup() {
   transistionTo = [color(34, 82, 131), color(159, 190, 208)];
   transistionFrom = [color(34, 82, 131), color(159, 190, 208)]
 }
+
+// window.onload = function() {
+//   canvas.setAttribute('height', windowHeight);
+// }
 
 function spawnWordGroup(x, y) {
   let festivalWord = new Word(x + 533, y, festival, "festival");
@@ -130,16 +135,24 @@ let count = 0;
 let transistionTime = 0;
 function setTime (target){
   transistionTime = millis();
-  if (target=="11am"){
+  if (target=="3pm"){
     transistionFrom = transistionTo;
     transistionTo = [color("#002761"), color("#BA7979")];
   }
-  if (target=="3pm"){
+  if (target=="11am"){
     transistionFrom = transistionTo;
     transistionTo = [color(34, 82, 131), color(159, 190, 208)];
   }
 }
 function draw() {
+
+  // if (frameCount == 200){
+  //   canvas.elt.style.height = windowHeight;
+  //     resizeCanvas(windowWidth, windowHeight);
+  //   glCanvas.resizeCanvas(windowWidth, windowHeight);
+  // }
+  // canvas.elt.setAttribute('width', document.documentElement.clientWidth);
+  // canvas.elt.setAttribute('height', document.documentElement.clientHeight);
   background("#91A9C2")
   // let brightness = 1-getScrollPercent();
   if (imageChange && frameCount%20==0){
@@ -163,7 +176,7 @@ function draw() {
 
   glCanvas.shader(glShader);
   glCanvas.rect(0,0,width, height);
-  image(glCanvas, 0, 0, windowWidth, windowHeight);
+  image(glCanvas, 0, 0, trueWidth, trueHeight);
   if (mouseIsPressed === true && random() < 0.4) {
     kites.push(new Kite(mouseX, mouseY));
   }

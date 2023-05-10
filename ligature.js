@@ -51,7 +51,12 @@ class Ligature {
         if (debug){
             stroke("red");
         }
+        // let diffX = this.word0.body.position.x-this.word1.body.position.x;
+        // let diffY = this.word0.body.position.x-this.word1.body.position.x;
+        // let distance = sqrt(sq(diffX) + sq(diffY));
         
+        
+
 
         bezier(
             this.word0.body.position.x + this.leftPointX, this.word0.body.position.y + this.leftPointY, 
@@ -63,10 +68,17 @@ class Ligature {
         if (debug){
             strokeWeight(5);
             stroke("blue");
+
             point(this.word0.body.position.x + this.leftPointX, this.word0.body.position.y + this.leftPointY);
             point(this.word0.body.position.x + this.leftControlX, this.word0.body.position.y + this.leftControlY);
             point(this.word1.body.position.x + this.rightControlX, this.word1.body.position.y + this.rightControlY);
             point(this.word1.body.position.x + this.rightPointX, this.word1.body.position.y + this.rightPointY);
+
+            // stroke("red");
+            // point(this.word0.body.position.x + this.leftPointX + diffX, this.word0.body.position.y + this.leftPointY + diffY);
+            // point(this.word0.body.position.x + this.leftControlX+ diffX, this.word0.body.position.y + this.leftControlY + diffY);
+            // point(this.word1.body.position.x + this.rightControlX+ diffX, this.word1.body.position.y + this.rightControlY + diffY);
+            // point(this.word1.body.position.x + this.rightPointX+ diffX, this.word1.body.position.y + this.rightPointY + diffY);
         }
         
 
