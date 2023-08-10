@@ -11,7 +11,6 @@ var Engine = Matter.Engine,
   Mouse = Matter.Mouse,
   Bodies = Matter.Bodies;
 
-// let s3Url = "https://cstudiocoral.s3.amazonaws.com/";
 let engine;
 let world;
 let words = [];
@@ -39,6 +38,9 @@ let imageChange = false;
 
 let transistionTo;
 let transistionFrom;
+
+let combo0 = [[34, 82, 131], [159, 190, 208]];
+let combo1 = ['#FF9987', '#97ABBC'];
 
 let tooltipElement;
 let showTooltip = true;
@@ -94,8 +96,8 @@ function setup() {
   boundaries.push(new Boundary(width / 2, height * 1.5, width*2, 100));
   windDirection = Matter.Vector.create(1,-0.5);
 
-  transistionTo = [color(34, 82, 131), color(159, 190, 208)];
-  transistionFrom = [color(34, 82, 131), color(159, 190, 208)]
+  transistionTo = [color(combo0[0]), color(combo0[1])];
+  transistionFrom = [color(combo0[0]), color(combo0[1])];
 }
 
 // window.onload = function() {
@@ -135,35 +137,28 @@ let count = 0;
 let transistionTime = 0;
 function setTime (target){
   transistionTime = millis();
-  if (target=="3pm"){
-    transistionFrom = transistionTo;
-    transistionTo = [color("#002761"), color("#BA7979")];
-  }
   if (target=="11am"){
     transistionFrom = transistionTo;
-    transistionTo = [color(34, 82, 131), color(159, 190, 208)];
+    transistionTo = [color(combo1[0]), color(combo1[1])];
+    print(combo1);
   }
+  if (target=="3pm"){
+    transistionFrom = transistionTo;
+    transistionTo = [color(combo0[0]), color(combo0[1])];
+    print(combo0);
+  }
+  
 }
 function draw() {
-
-  // if (frameCount == 200){
-  //   canvas.elt.style.height = windowHeight;
-  //     resizeCanvas(windowWidth, windowHeight);
-  //   glCanvas.resizeCanvas(windowWidth, windowHeight);
-  // }
-  // canvas.elt.setAttribute('width', document.documentElement.clientWidth);
-  // canvas.elt.setAttribute('height', document.documentElement.clientHeight);
   background("#91A9C2")
-  // let brightness = 1-getScrollPercent();
   if (imageChange && frameCount%20==0){
-    // kiteIndex = (kiteIndex + 1) % kiteSpritesURL.length;
     document.getElementById("changeKite").src = random(kiteSpritesURL);
   }
   glShader.setUniform('u_time', millis()/1000);
   glShader.setUniform('u_brightness',1);
   glShader.setUniform('u_resolution', [glCanvas.width/(glDensity*2), glCanvas.height/(glDensity*2)]);
   glShader.setUniform('u_mouse', [mouseX, mouseY]);
-  let t = (millis()-transistionTime)/300;
+  let t = (millis()-transistionTime)/1000;
   let finalColor0 = transistionTo[0];
   let finalColor1 = transistionTo[1];
   if (t < 1){
@@ -195,7 +190,6 @@ function draw() {
   for (let kite of kites){
     kite.show();
   }
-  // windDirection = Matter.Vector.create(((width-mouseX)/width)*1.2, ((height-mouseY)/height-1)*1.2);
 
 }
 
@@ -212,14 +206,10 @@ function mousePressed() {
   if (showTooltip){
     showTooltip = false;
     tooltipElement.style.display = 'none';
-    // print(tooltipElement);
   }
 }
 
 function windowResized(){
-  // for (let boundary of boundaries){
-  //   World.remove(boundary.body);
-  // }
   resizeCanvas(windowWidth, windowHeight);
   glCanvas.resizeCanvas(windowWidth, windowHeight);
 }
@@ -248,7 +238,6 @@ window.smoothScroll = function(target) {
   scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
 }
 let kiteIndex = 0;
-// let kiteIcon = ["/assets/kites/diamondBW.svg", "/assets/kites/boxBW.svg","/assets/kites/arrowBW.svg"];
 let kiteIcon = ["/assets/kites/diamondBW.svg", "/assets/kites/boxBW.svg","/assets/kites/arrowBW.svg"];
 
 function startChangeImage(){

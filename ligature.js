@@ -3,7 +3,8 @@ class Ligature {
         //in offsets relative to the bottom center
         this.word0 = word0;
         this.word1 = word1;
-        //bezier
+
+        //hardcoded bezier points
 
         if (word0.type == "festival"){
             this.leftPointX = 223/2;
@@ -46,18 +47,10 @@ class Ligature {
         let debug = false;
         noFill(); 
         strokeWeight(2);
-        // stroke("#231F20");
-        stroke(225);
+        stroke(255);
         if (debug){
             stroke("red");
         }
-        // let diffX = this.word0.body.position.x-this.word1.body.position.x;
-        // let diffY = this.word0.body.position.x-this.word1.body.position.x;
-        // let distance = sqrt(sq(diffX) + sq(diffY));
-        
-        
-
-
         bezier(
             this.word0.body.position.x + this.leftPointX, this.word0.body.position.y + this.leftPointY, 
             this.word0.body.position.x + this.leftControlX, this.word0.body.position.y + this.leftControlY, 

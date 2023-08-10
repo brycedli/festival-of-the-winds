@@ -80,7 +80,6 @@ a {
 main {
 	overflow-y: auto;
 	padding: 0; margin: 0; 
-	/* margin: 1rem auto; */
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -126,15 +125,11 @@ footer >* p {
 	color:rgba(0, 0, 0, 0.7);
 }
 div.content {
-	/* Auto layout */
-	
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	padding: 80px 80px;
 	gap: 40px;
-
-	/* background: #E3FD8C; */
 	padding: 1rem auto;
 	display: flex;
 	flex-wrap: wrap;
@@ -149,9 +144,6 @@ div.icongroup {
 }
 
 div.icongrouphorizontal {
-		
-	/* Auto layout */
-
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
@@ -164,22 +156,6 @@ div.icongrouphorizontal {
 	left: calc(50% - 1112px/2);
 	top: 40px;
 }
-
-/* button.down {
-	background: none;
-	border: none;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
-	align-items: center;
-	padding: 0px;
-
-	position: absolute;
-	width: 120px;
-	left: calc(50% - 120px/2);
-	bottom: calc(0% + 20px);
-
-} */
 
 button.down {
 	display: flex;
@@ -218,11 +194,6 @@ button.up{
 	align-items: center;
 	padding: 14px 20px;
 	gap: 10px;
-	
-	/* position: absolute; */
-	/* left: calc(50% - 187px/2 + 0.5px);
-	bottom: calc(30px); */
-
 	border: none;
 	background-color: #FFFFFF;
 	border-radius: 200px;
@@ -347,7 +318,6 @@ img.banner{
 }
 
 div.schedulewoah{
-	/* background: #FF5E54; */
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
@@ -383,11 +353,6 @@ div.listSection {
 	padding: 0px;
 	gap: 20px;
 }
-
-/* div.heroSpacer {
-	pointer-events:none;
-	height: 100vh;
-} */
 
 #sketch-holder {
 	pointer-events:auto;
